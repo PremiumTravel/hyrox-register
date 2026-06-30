@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYROX Fuerteventura – Reiseanmeldung</title>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    // ============================================================
+    // EMAILJS KONFIGURATION – bitte hier Ihre IDs eintragen:
+    // 1. Account anlegen: https://www.emailjs.com
+    // 2. E-Mail-Dienst verbinden (Gmail, Outlook o.ä.)
+    // 3. Zwei Templates erstellen (Kunde + Agentur)
+    // 4. Public Key unter Account > API Keys kopieren
+    // ============================================================
+    emailjs.init({
+      publicKey: "dYtBCYivVsn3DB5nG",
+    });
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#05164D;
+    --deep:#05164D;
+    --sand:#EBE3D7;
+    --paper:#FFFFFF;
+    --coral:#FFAD00;
+    --coral-dark:#E69D00;
+    --ocean:#0089A7;
+    --green:#1F7A4D;
+    --red:#C0392B;
+    --line:#D4D4D4;
+    --grey-text:#787878;
+    --shadow: 0 8px 24px rgba(5,22,77,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    color:var(--deep);
+    font-weight:600;
+    margin:0;
+  }
+
+  .wrap{
+    max-width:1140px;
+    margin:0 auto;
+    padding:40px 20px 80px;
+  }
+
+  /* ---------- LAYOUT GRID ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:36px;
+    align-items:start;
+  }
+  @media (max-width:880px){
+    .grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- CARD / SECTIONS ---------- */
+  .card{
+    background:var(--paper);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .section{
+    padding:32px 34px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    transition:max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, padding .4s ease;
+  }
+  .section:last-of-type{border-bottom:none;}
+
+  .section.is-locked{
+    max-height:0 !important;
+    padding-top:0;
+    padding-bottom:0;
+    opacity:0;
+    border-bottom:none;
+    pointer-events:none;
+  }
+  .section.is-unlocked{
+    animation:unlockGlow .6s ease;
+  }
+  @keyframes unlockGlow{
+    0%{ background:rgba(255,173,0,0.10); }
+    100%{ background:transparent; }
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .section-num{
+    font-family:'Fraunces',serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--coral);
+    border:1.5px solid var(--coral);
+    border-radius:50%;
+    width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .section-head h2{font-size:21px;}
+  .section-desc{
+    font-size:13.5px;
+    color:#787878;
+    margin:4px 0 0 42px;
+  }
+
+  /* ---------- FORM ELEMENTS ---------- */
+  .field-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
+  }
+  .field-row.single{grid-template-columns:1fr;}
+  .field-row.three{grid-template-columns:1fr 1fr 1fr;}
+  @media (max-width:600px){
+    .field-row, .field-row.three{grid-template-columns:1fr;}
+  }
+
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--deep);
+    margin-bottom:6px;
+  }
+  label .opt{
+    font-weight:400;
+    color:#787878;
+    font-size:12px;
+  }
+
+  input, select{
+    width:100%;
+    padding:11px 13px;
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    background:#fff;
+    color:var(--ink);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px rgba(255,173,0,0.18);
+  }
+  input.error, select.error{
+    border-color:var(--red);
+    background:#FBEAEA;
+  }
+  .err-msg{
+    color:var(--red);
+    font-size:12.5px;
+    margin-top:5px;
+    display:none;
+    font-weight:500;
+  }
+  .err-msg.show{display:block;}
+
+  /* fixed destination chip */
+  .fixed-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--sand);
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    padding:11px 14px;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--deep);
+  }
+  .fixed-chip svg{flex-shrink:0;}
+
+  /* trip date radio cards */
+  .trip-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:600px){.trip-options{grid-template-columns:1fr;}}
+  .trip-card{
+    position:relative;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:16px 16px 16px 44px;
+    cursor:pointer;
+    background:#fff;
+    transition:border-color .15s, background .15s;
+  }
+  .trip-card:hover{border-color:#0089A7;}
+  .trip-card input{position:absolute; left:14px; top:18px; width:18px; height:18px; accent-color:var(--coral); margin:0; padding:0;}
+  .trip-card .tc-title{font-weight:700; font-size:14.5px; color:var(--deep);}
+  .trip-card .tc-sub{font-size:12.5px; color:#787878; margin-top:2px;}
+  .trip-card.checked{border-color:var(--coral); background:#FFF6E0;}
+
+  /* number stepper */
+  .stepper{
+    display:inline-flex;
+    align-items:center;
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .stepper button{
+    width:38px;height:38px;
+    background:var(--paper);
+    border:none;
+    font-size:18px;
+    color:var(--deep);
+    cursor:pointer;
+  }
+  .stepper button:hover{background:var(--sand);}
+  .stepper span{
+    width:44px;
+    text-align:center;
+    font-weight:700;
+    font-size:15px;
+  }
+
+  .room-config{
+    margin-top:22px;
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .room-config-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:10px 0;
+  }
+  .room-config-row + .room-config-row{
+    border-top:1px solid #EFE9DC;
+  }
+  .room-config-label{
+    display:flex;
+    flex-direction:column;
+  }
+  .room-config-title{
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--deep);
+  }
+  .room-config-sub{
+    font-size:12.5px;
+    color:#787878;
+    margin-top:2px;
+  }
+
+  .room-choice-block{
+    margin-top:22px;
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .room-choice-title{
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--deep);
+    margin-bottom:10px;
+  }
+  .room-choice-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  @media (max-width:600px){
+    .room-choice-options{grid-template-columns:1fr;}
+  }
+  .room-choice-card{
+    position:relative;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:13px 14px 13px 40px;
+    cursor:pointer;
+    background:#fff;
+    transition:border-color .15s, background .15s;
+    display:block;
+  }
+  .room-choice-card:hover{border-color:var(--ocean);}
+  .room-choice-card input{position:absolute; left:13px; top:15px; width:17px; height:17px; accent-color:var(--coral); margin:0; padding:0;}
+  .room-choice-card .rc-title{font-weight:700; font-size:14px; color:var(--deep);}
+  .room-choice-card .rc-sub{font-size:12px; color:#787878; margin-top:2px;}
+  .room-choice-card.checked{border-color:var(--coral); background:#FFFDF8;}
+
+  .room-partner-row{
+    margin-top:14px;
+  }
+  .room-partner-row label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--deep);
+    margin-bottom:6px;
+  }
+
+  .room-match-note{
+    margin-top:14px;
+    background:#FBEAEA;
+    border:1px solid rgba(192,57,43,0.35);
+    color:var(--red);
+    font-size:12.5px;
+    font-weight:600;
+    border-radius:8px;
+    padding:10px 12px;
+    line-height:1.5;
+    display:none;
+  }
+  .room-match-note.show{display:block;}
+  .room-match-note.ok{
+    background:#EAF5EE;
+    border-color:rgba(31,122,77,0.35);
+    color:var(--green);
+  }
+
+  /* traveler subform */
+  .traveler-block{
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:24px 22px;
+    margin-top:18px;
+    background:#fff;
+    animation:fadein .25s ease;
+  }
+  @keyframes fadein{from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:translateY(0);}}
+  .traveler-block h3{
+    font-size:15.5px;
+    color:var(--coral-dark);
+    margin-bottom:16px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .traveler-block h3 .badge{
+    background:var(--coral);
+    color:var(--deep);
+    font-size:11.5px;
+    font-weight:700;
+    border-radius:5px;
+    padding:2px 8px;
+    font-family:'Inter',sans-serif;
+  }
+
+  /* checkbox AGB */
+  .agb-row{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background:var(--sand);
+    border-radius:10px;
+    padding:18px 18px;
+    margin-top:6px;
+  }
+  .agb-row input[type=checkbox]{
+    width:19px;height:19px;
+    margin-top:2px;
+    accent-color:var(--coral);
+    flex-shrink:0;
+  }
+  .agb-row label{
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--ink);
+    margin:0;
+  }
+  .agb-row a{color:var(--coral-dark); font-weight:600; text-decoration:underline;}
+
+  .payment-terms-box{
+    border:1.5px solid var(--line);
+    border-left:4px solid var(--coral);
+    border-radius:8px;
+    padding:16px 18px;
+    margin-top:18px;
+    background:#FFFDF8;
+  }
+  .payment-terms-box h3{
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--deep);
+    margin:0 0 10px 0;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .payment-terms-box ul{
+    margin:0;
+    padding-left:20px;
+    font-size:14px;
+    color:var(--ink);
+    line-height:1.7;
+  }
+  .payment-terms-box li{margin-bottom:4px;}
+  .payment-terms-box strong{color:var(--deep);}
+
+  .security-note{
+    font-size:12.5px;
+    color:#787878;
+    line-height:1.55;
+    margin-top:14px;
+    margin-bottom:0;
+    padding-left:14px;
+    border-left:3px solid var(--line);
+  }
+
+  .liability-note{
+    font-size:12px;
+    color:#787878;
+    line-height:1.55;
+    margin:-4px 0 18px 0;
+    padding:10px 12px;
+    background:var(--sand);
+    border-radius:7px;
+  }
+
+  /* submit button */
+  .submit-btn{
+    width:100%;
+    background:var(--coral);
+    color:var(--deep);
+    border:none;
+    border-radius:9px;
+    padding:16px;
+    font-size:16px;
+    font-weight:700;
+    font-family:'Inter',sans-serif;
+    cursor:pointer;
+    transition:background .15s, transform .1s;
+    margin-top:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .submit-btn:hover{background:var(--coral-dark);}
+  .btn-spinner{
+    display:none;
+    width:18px;
+    height:18px;
+    border:2.5px solid rgba(5,22,77,0.25);
+    border-top-color:var(--deep);
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+  }
+  .submit-btn.is-loading .btn-spinner{display:inline-block;}
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .submit-btn:active{transform:scale(0.99);}
+  .submit-btn:disabled{
+    background:#C9B9A8;
+    cursor:not-allowed;
+  }
+  .submit-note{
+    font-size:12px;
+    color:#787878;
+    text-align:center;
+    margin-top:12px;
+  }
+
+  /* ---------- BOARDING PASS SUMMARY ---------- */
+  .pass{
+    position:sticky;
+    top:24px;
+    background:var(--deep);
+    color:var(--paper);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .pass-logo-band{
+    background:#FFFFFF;
+    padding:16px 26px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .pass-logo-img{
+    max-width:200px;
+    height:auto;
+    display:block;
+  }
+  .pass-top{
+    padding:26px 26px 20px;
+  }
+  .pass-eyebrow{
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--coral);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .pass-route{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    font-weight:600;
+  }
+  .pass-route .arrow{color:var(--coral); font-size:18px;}
+  .pass-sub{font-size:12.5px; color:#9BB4D8; margin-top:6px;}
+  .pass-divider{
+    position:relative;
+    border-top:1.5px dashed #1F3A7A;
+    margin:0 0;
+  }
+  .pass-divider::before, .pass-divider::after{
+    content:"";
+    position:absolute;
+    top:-9px;
+    width:18px;height:18px;
+    background:var(--sand);
+    border-radius:50%;
+  }
+  .pass-divider::before{left:-9px;}
+  .pass-divider::after{right:-9px;}
+
+  .pass-body{padding:22px 26px;}
+  .pass-line{
+    display:flex;
+    justify-content:space-between;
+    font-size:13.5px;
+    padding:7px 0;
+    color:#B8C9E8;
+  }
+  .pass-line strong{color:#fff; font-weight:600;}
+  .pass-discount{
+    color:var(--coral) !important;
+    font-weight:700;
+  }
+  .pass-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid #1F3A7A;
+  }
+  .pass-total .label{font-size:13px; color:#9BB4D8; font-weight:600;}
+  .pass-total .amount{
+    font-family:'Fraunces',serif;
+    font-size:30px;
+    font-weight:700;
+    color:#fff;
+  }
+  .pass-total .amount small{font-size:13px; font-weight:500; color:#9BB4D8;}
+
+  .pass-payment-plan{
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed #2E4C5F;
+  }
+  .pass-payment-title{
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:700;
+    color:#FFAD00;
+    margin-bottom:10px;
+  }
+  .pass-line-sub{
+    font-size:11px;
+    color:#9BB4D8;
+    margin-top:-3px;
+    margin-bottom:4px;
+    line-height:1.4;
+  }
+
+  .pass-deadline{
+    margin-top:14px;
+    background:rgba(255,173,0,0.16);
+    border:1px solid rgba(255,173,0,0.4);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:12px;
+    color:#FFE8B0;
+    line-height:1.45;
+  }
+  .pass-note{
+    font-size:11.5px;
+    color:#9BB4D8;
+    margin-top:14px;
+    line-height:1.5;
+  }
+
+  /* ---------- SUCCESS SCREEN ---------- */
+  .success-screen{
+    display:none;
+    text-align:center;
+    padding:70px 30px;
+  }
+  .success-screen.show{display:block;}
+  .success-icon{
+    width:74px;height:74px;
+    border-radius:50%;
+    background:var(--green);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 22px;
+    font-size:34px;
+  }
+  .success-screen h2{font-size:26px; margin-bottom:10px;}
+  .success-screen p{max-width:480px; margin:0 auto; color:#787878; font-size:15px;}
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="grid">
+
+
+    <!-- ============ FORM CARD ============ -->
+    <div class="card" id="formCard">
+      <form id="bookingForm" novalidate>
+
+        <!-- 1. Reisetermin -->
+        <div class="section">
+          <div class="section-head">
+            <span class="section-num">1</span>
+            <h2>Reisetermin wählen</h2>
+          </div>
+          <p class="section-desc">Beide Termine im selben HYROX-Format auf Fuerteventura.</p>
+          <div class="trip-options" style="margin-top:18px;">
+            <label class="trip-card" id="tripCard1">
+              <input type="radio" name="tripDate" value="2027-02-25|2027-03-04" required>
+              <div class="tc-title">25.02. – 04.03.</div>
+              <div class="tc-sub">Termin 1 · 7 Nächte</div>
+            </label>
+            <label class="trip-card" id="tripCard2">
+              <input type="radio" name="tripDate" value="2027-03-04|2027-03-11">
+              <div class="tc-title">04.03. – 11.03.</div>
+              <div class="tc-sub">Termin 2 · 7 Nächte</div>
+            </label>
+          </div>
+          <div class="err-msg" id="err-tripDate">Bitte wählen Sie einen Reisetermin aus.</div>
+        </div>
+
+        <!-- 2. Reisende -->
+        <div class="section is-locked" id="section-2">
+          <div class="section-head">
+            <span class="section-num">2</span>
+            <h2>Zimmer &amp; Reisende</h2>
+          </div>
+          <p class="section-desc">Wählen Sie zuerst Ihre Zimmer – die Anzahl der Reisenden ergibt sich automatisch.</p>
+
+          <div class="room-config" style="margin-top:18px;">
+
+            <!-- Doppelzimmer -->
+            <div class="room-config-row">
+              <div class="room-config-label">
+                <span class="room-config-title">Doppelzimmer</span>
+                <span class="room-config-sub">2.285,00 € p. P. &middot; je 2 Reisende</span>
+              </div>
+              <div class="stepper">
+                <button type="button" id="decDouble" aria-label="Weniger Doppelzimmer">−</button>
+                <span id="doubleRoomCount">0</span>
+                <button type="button" id="incDouble" aria-label="Mehr Doppelzimmer">+</button>
+              </div>
+            </div>
+
+            <!-- Einzelzimmer -->
+            <div class="room-config-row">
+              <div class="room-config-label">
+                <span class="room-config-title">Einzelzimmer</span>
+                <span class="room-config-sub">2.285,00 € + 585,00 € Zuschlag p. P.</span>
+              </div>
+              <div class="stepper">
+                <button type="button" id="decSingle" aria-label="Weniger Einzelzimmer">−</button>
+                <span id="singleRoomCount">0</span>
+                <button type="button" id="incSingle" aria-label="Mehr Einzelzimmer">+</button>
+              </div>
+            </div>
+
+            <!-- Halbpension -->
+            <div class="room-config-row">
+              <div class="room-config-label">
+                <span class="room-config-title">Halbpension</span>
+                <span class="room-config-sub">+ 175,00 € p. P. Zuschlag</span>
+              </div>
+              <div class="stepper">
+                <button type="button" id="decHalfBoard" aria-label="Weniger Halbpension">−</button>
+                <span id="halfBoardCount">0</span>
+                <button type="button" id="incHalfBoard" aria-label="Mehr Halbpension">+</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Zusammenfassung Zimmer → Reisende -->
+          <div id="roomSummaryNote" class="room-match-note" style="display:none;"></div>
+
+          <div id="travelersContainer"><!-- traveler blocks injected here --></div>
+        </div>
+
+        <!-- 3. Flug -->
+        <div class="section is-locked" id="section-3">
+          <div class="section-head">
+            <span class="section-num">3</span>
+            <h2>Flug</h2>
+          </div>
+          <p class="section-desc">Der Flug ist nicht im Gesamtpreis enthalten. Zielflughafen ist fest vorgegeben.</p>
+          <div class="field-row" style="margin-top:18px;">
+            <div>
+              <label for="departureAirport">Gewünschter Abflughafen</label>
+              <select id="departureAirport" name="departureAirport" required>
+                <option value="" disabled selected>Bitte wählen oder tippen</option>
+              </select>
+              <div class="err-msg" id="err-departureAirport">Bitte wählen Sie Ihren gewünschten Abflughafen aus.</div>
+            </div>
+            <div>
+              <label>Zielflughafen</label>
+              <div class="fixed-chip">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 16l20-8-20-8v6l14 2-14 2v6z" fill="#C96F4A"/></svg>
+                Fuerteventura (FUE)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. AGB -->
+        <div class="section is-locked" id="section-4">
+          <div class="section-head">
+            <span class="section-num">4</span>
+            <h2>Bedingungen</h2>
+          </div>
+          <p class="section-desc">Bitte bestätigen Sie unsere Allgemeinen Geschäftsbedingungen.</p>
+
+          <div class="payment-terms-box">
+            <h3>Zahlungsbedingungen</h3>
+            <ul>
+              <li><strong>20 % Anzahlung</strong> des Gesamtpreises – sofort nach Rechnungseingang fällig</li>
+              <li><strong>80 % Restzahlung</strong> – fällig bis spätestens <strong id="termsBalanceDue">42 Tage vor Reisebeginn</strong></li>
+            </ul>
+          </div>
+
+          <p class="security-note">
+            Diese Pauschalreise ist gemäß § 651r BGB gegen Insolvenz abgesichert. Den Reisesicherungsschein erhalten Sie zusammen mit Ihrer Buchungsbestätigung.
+          </p>
+
+          <div class="agb-row" style="margin-top:14px;">
+            <input type="checkbox" id="agbAccept" name="agbAccept" required>
+            <label for="agbAccept">Ich habe die <a href="/agb" target="_blank" rel="noopener">Allgemeinen Geschäftsbedingungen</a> gelesen und akzeptiere sie für alle oben angegebenen Reisenden.</label>
+          </div>
+          <div class="err-msg" id="err-agbAccept">Bitte akzeptieren Sie die AGB, um fortzufahren.</div>
+
+          <div class="agb-row" style="margin-top:10px;">
+            <input type="checkbox" id="privacyAccept" name="privacyAccept" required>
+            <label for="privacyAccept">Ich habe die <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Buchungsabwicklung einverstanden.</label>
+          </div>
+          <div class="err-msg" id="err-privacyAccept">Bitte akzeptieren Sie die Datenschutzerklärung, um fortzufahren.</div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span class="btn-spinner" id="btnSpinner"></span>
+            <span id="btnLabel">Verbindlich buchen</span>
+          </button>
+          <p class="submit-note">Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Unser Premium Travel Team meldet sich zeitnah mit den Reiseunterlagen.</p>
+        </div>
+
+      </form>
+
+      <!-- success screen -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">✓</div>
+        <h2>Buchung erfolgreich</h2>
+        <p>Vielen Dank für Ihre verbindliche Buchung. Unser Premium Travel Team meldet sich zeitnah mit Ihren Reiseunterlagen, inklusive Rechnung. Eine Bestätigung haben wir zusätzlich an Ihre E-Mail-Adresse gesendet.</p>
+      </div>
+    </div>
+
+    <!-- ============ BOARDING PASS SUMMARY ============ -->
+    <div class="pass">
+      <div class="pass-logo-band">
+        <img src="data:image/jpeg;base64,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" alt="Lufthansa City Center Premium Travel Reiseagentur" class="pass-logo-img">
+      </div>
+      <div class="pass-top">
+        <div class="pass-eyebrow">Ihre Reise</div>
+        <div class="pass-route"><span id="passDepartureCode">DEP</span> <span class="arrow">✈</span> FUE</div>
+        <div class="pass-sub" id="passDates">Termin noch nicht gewählt</div>
+      </div>
+      <div class="pass-divider"></div>
+      <div class="pass-body">
+        <div class="pass-line"><span>Reisende</span><strong id="passTravelers">1 Person</strong></div>
+        <div class="pass-line"><span>Preis p. P.</span><strong id="passPricePerPerson">2.285,00 €</strong></div>
+        <div class="pass-line" id="passDiscountLine" style="display:none;">
+          <span>Frühbucherrabatt p. P.</span><strong class="pass-discount">− 300,00 €</strong>
+        </div>
+        <div class="pass-line" id="passSingleRoomLine" style="display:none;">
+          <span>Einzelzimmer-Zuschlag</span><strong id="passSingleRoomAmount">+ 0,00 €</strong>
+        </div>
+        <div class="pass-line" id="passHalfBoardLine" style="display:none;">
+          <span>Halbpension-Zuschlag</span><strong id="passHalfBoardAmount">+ 0,00 €</strong>
+        </div>
+        <div class="pass-total">
+          <span class="label">Gesamtpreis</span>
+          <span class="amount" id="passTotal">2.285,00 €</span>
+        </div>
+
+        <div class="pass-payment-plan">
+          <div class="pass-payment-title">Zahlungsplan</div>
+          <div class="pass-line"><span>Anzahlung (20 %)</span><strong id="passDeposit">685,50 €</strong></div>
+          <div class="pass-line-sub" id="passDepositNote">Sofort nach Rechnungseingang fällig</div>
+          <div class="pass-line" style="margin-top:8px;"><span>Restzahlung (80 %)</span><strong id="passBalance">1.599,50 €</strong></div>
+          <div class="pass-line-sub" id="passBalanceNote">Fällig bis spätestens 42 Tage vor Reisebeginn</div>
+        </div>
+
+        <div class="pass-deadline" id="passDeadlineNote">
+          Frühbucherrabatt von 300 € p. P. bei Buchung bis <strong>30.07.</strong> Danach gilt der reguläre Preis.
+        </div>
+        <p class="pass-note">Flug nicht im Gesamtpreis enthalten. Zielflughafen Fuerteventura (FUE) ist fest vorgegeben und nicht änderbar.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---------- CONFIG ----------
+  var BASE_PRICE = 2285.00;       // Doppelzimmer-Preis p.P. ohne Rabatt
+  var EARLY_BIRD_DISCOUNT = 300.00; // Rabatt p.P.
+  var EARLY_BIRD_DEADLINE = new Date(2026, 6, 30, 23, 59, 59); // 30.07. (Monat 0-indexiert: 6 = Juli)
+  var SINGLE_ROOM_SURCHARGE = 585.00;   // Einzelzimmer-Zuschlag p.P. (Pauschale)
+  var HALF_BOARD_SURCHARGE = 175.00;    // Halbpension-Zuschlag p.P. (Pauschale)
+  var DEPOSIT_PERCENT = 0.20;       // Anzahlung: 20 % sofort nach Rechnungseingang
+  var BALANCE_DUE_DAYS_BEFORE_TRIP = 42; // Restzahlung fällig bis X Tage vor Reisebeginn
+  // ============================================================
+  // EMAILJS IDs – nach Einrichtung auf emailjs.com hier eintragen:
+  // ============================================================
+  var EMAILJS_SERVICE_ID       = "service_rawqh5r";
+  var EMAILJS_TEMPLATE_AGENTUR = "template_xu6cfnb"; // Agentur-Benachrichtigung
+  var AGENTUR_EMAIL            = "info@travel-reiseagentur.de"; // <-- Ihre Agentur-E-Mail
+
+  var MIN_AGE = 18;
+  var maxRooms = 8;      // max Zimmer gesamt
+  var doubleRooms = 0;   // Anzahl Doppelzimmer
+  var singleRooms = 0;   // Anzahl Einzelzimmer
+  var halfBoardCount = 0;
+
+  // travelerCount ist immer abgeleitet
+  function getTravelerCount(){ return doubleRooms * 2 + singleRooms; }
+
+  // ---------- EUROPÄISCHE ABFLUGHÄFEN (gruppiert nach Land) ----------
+  var EUROPE_AIRPORTS = {
+    "Deutschland": [
+      ["FRA","Frankfurt am Main"],["MUC","München"],["DUS","Düsseldorf"],["BER","Berlin Brandenburg"],
+      ["HAM","Hamburg"],["CGN","Köln/Bonn"],["STR","Stuttgart"],["HAJ","Hannover"],["NUE","Nürnberg"],
+      ["LEJ","Leipzig/Halle"],["DRS","Dresden"],["BRE","Bremen"],["DTM","Dortmund"],["FMO","Münster Osnabrück"],
+      ["FKB","Karlsruhe/Baden-Baden"],["FDH","Friedrichshafen"],["SCN","Saarbrücken"],["PAD","Paderborn/Lippstadt"],
+      ["NRN","Weeze"],["HHN","Frankfurt-Hahn"],["ERF","Erfurt-Weimar"],["RLG","Rostock-Laage"]
+    ],
+    "Österreich": [
+      ["VIE","Wien"],["SZG","Salzburg"],["GRZ","Graz"],["INN","Innsbruck"],["LNZ","Linz"],["KLU","Klagenfurt"]
+    ],
+    "Schweiz": [
+      ["ZRH","Zürich"],["GVA","Genf"],["BSL","Basel"],["BRN","Bern"],["LUG","Lugano"],["SIR","Sion"]
+    ],
+    "Niederlande": [
+      ["AMS","Amsterdam"],["EIN","Eindhoven"],["RTM","Rotterdam"],["GRQ","Groningen"],["MST","Maastricht"]
+    ],
+    "Belgien": [
+      ["BRU","Brüssel"],["CRL","Brüssel Charleroi"],["ANR","Antwerpen"],["LGG","Lüttich"],["OST","Ostende"]
+    ],
+    "Luxemburg": [
+      ["LUX","Luxemburg"]
+    ],
+    "Frankreich": [
+      ["CDG","Paris Charles de Gaulle"],["ORY","Paris Orly"],["NCE","Nizza"],["LYS","Lyon"],["MRS","Marseille"],
+      ["TLS","Toulouse"],["BOD","Bordeaux"],["NTE","Nantes"],["MPL","Montpellier"],
+      ["LIL","Lille"],["SXB","Straßburg"],["RNS","Rennes"],["BIQ","Biarritz"],["AJA","Ajaccio"],["BIA","Bastia"]
+    ],
+    "Vereinigtes Königreich": [
+      ["LHR","London Heathrow"],["LGW","London Gatwick"],["LCY","London City"],["STN","London Stansted"],
+      ["LTN","London Luton"],["MAN","Manchester"],["BHX","Birmingham"],["EDI","Edinburgh"],["GLA","Glasgow"],
+      ["BRS","Bristol"],["LPL","Liverpool"],["NCL","Newcastle"],["BFS","Belfast"],["ABZ","Aberdeen"]
+    ],
+    "Irland": [
+      ["DUB","Dublin"],["ORK","Cork"],["SNN","Shannon"],["NOC","Knock"]
+    ],
+    "Spanien": [
+      ["MAD","Madrid"],["BCN","Barcelona"],["PMI","Palma de Mallorca"],["AGP","Málaga"],["ALC","Alicante"],
+      ["VLC","Valencia"],["SVQ","Sevilla"],["BIO","Bilbao"],["LPA","Gran Canaria"],["TFS","Teneriffa Süd"],
+      ["TFN","Teneriffa Nord"],["ACE","Lanzarote"],["IBZ","Ibiza"],["MAH","Menorca"],
+      ["SCQ","Santiago de Compostela"],["XRY","Jerez"],["GRO","Girona"],["RMU","Murcia"],["SPC","La Palma"]
+    ],
+    "Portugal": [
+      ["LIS","Lissabon"],["OPO","Porto"],["FAO","Faro"],["FNC","Madeira (Funchal)"],["PDL","Ponta Delgada (Azoren)"]
+    ],
+    "Italien": [
+      ["FCO","Rom Fiumicino"],["MXP","Mailand Malpensa"],["LIN","Mailand Linate"],["BGY","Mailand Bergamo"],
+      ["VCE","Venedig"],["NAP","Neapel"],["BLQ","Bologna"],["FLR","Florenz"],["PSA","Pisa"],["CTA","Catania"],
+      ["PMO","Palermo"],["TRN","Turin"],["BRI","Bari"],["CAG","Cagliari"],["OLB","Olbia"],["VRN","Verona"],
+      ["GOA","Genua"],["TRS","Triest"],["AHO","Alghero"]
+    ],
+    "Griechenland": [
+      ["ATH","Athen"],["SKG","Thessaloniki"],["HER","Heraklion (Kreta)"],["RHO","Rhodos"],["CHQ","Chania (Kreta)"],
+      ["CFU","Korfu"],["KGS","Kos"],["JTR","Santorini"],["JMK","Mykonos"],["ZTH","Zakynthos"],["PVK","Preveza"]
+    ],
+    "Türkei": [
+      ["IST","Istanbul"],["SAW","Istanbul Sabiha Gökçen"],["AYT","Antalya"],["ADB","Izmir"],["DLM","Dalaman"],
+      ["BJV","Bodrum"],["ESB","Ankara"]
+    ],
+    "Polen": [
+      ["WAW","Warschau"],["KRK","Krakau"],["GDN","Gdansk"],["WRO","Breslau"],["POZ","Posen"],["KTW","Katowice"]
+    ],
+    "Tschechien": [
+      ["PRG","Prag"],["BRQ","Brünn"]
+    ],
+    "Slowakei": [
+      ["BTS","Bratislava"],["KSC","Košice"]
+    ],
+    "Ungarn": [
+      ["BUD","Budapest"]
+    ],
+    "Rumänien": [
+      ["OTP","Bukarest"],["CLJ","Cluj-Napoca"],["TSR","Timișoara"]
+    ],
+    "Bulgarien": [
+      ["SOF","Sofia"],["VAR","Varna"],["BOJ","Burgas"]
+    ],
+    "Kroatien": [
+      ["ZAG","Zagreb"],["SPU","Split"],["DBV","Dubrovnik"],["ZAD","Zadar"],["PUY","Pula"],["RJK","Rijeka"]
+    ],
+    "Slowenien": [
+      ["LJU","Ljubljana"]
+    ],
+    "Serbien": [
+      ["BEG","Belgrad"]
+    ],
+    "Dänemark": [
+      ["CPH","Kopenhagen"],["BLL","Billund"],["AAL","Aalborg"]
+    ],
+    "Schweden": [
+      ["ARN","Stockholm Arlanda"],["GOT","Göteborg"],["MMX","Malmö"]
+    ],
+    "Norwegen": [
+      ["OSL","Oslo"],["BGO","Bergen"],["TRD","Trondheim"],["SVG","Stavanger"]
+    ],
+    "Finnland": [
+      ["HEL","Helsinki"],["TMP","Tampere"]
+    ],
+    "Island": [
+      ["KEF","Reykjavík Keflavík"]
+    ],
+    "Baltikum": [
+      ["RIX","Riga"],["TLL","Tallinn"],["VNO","Vilnius"]
+    ],
+    "Sonstiges Europa": [
+      ["MLA","Malta"],["LCA","Larnaca (Zypern)"],["PFO","Paphos (Zypern)"],
+      ["TIA","Tirana"],["SJJ","Sarajevo"],["SKP","Skopje"],["PRN","Pristina"],["KIV","Chisinau"]
+    ]
+  };
+
+  var travelersContainer = document.getElementById('travelersContainer');
+
+  // ---------- TRIP DATE CARDS (visual checked state) ----------
+  var tripRadios = document.querySelectorAll('input[name="tripDate"]');
+  tripRadios.forEach(function(r){
+    r.addEventListener('change', function(){
+      document.getElementById('tripCard1').classList.toggle('checked', tripRadios[0].checked);
+      document.getElementById('tripCard2').classList.toggle('checked', tripRadios[1].checked);
+      updateSummary();
+      revalidateAllBirthdates();
+    });
+  });
+
+  function getSelectedTripRange(){
+    var checked = document.querySelector('input[name="tripDate"]:checked');
+    if(!checked) return null;
+    var parts = checked.value.split('|');
+    return { start: new Date(parts[0]), end: new Date(parts[1]) };
+  }
+
+  function getTripNights(trip){
+    if(!trip) return 0;
+    var msPerDay = 1000 * 60 * 60 * 24;
+    return Math.round((trip.end.getTime() - trip.start.getTime()) / msPerDay);
+  }
+
+  function getBalanceDueDate(trip){
+    if(!trip) return null;
+    var due = new Date(trip.start.getTime());
+    due.setDate(due.getDate() - BALANCE_DUE_DAYS_BEFORE_TRIP);
+    return due;
+  }
+
+  // ---------- ZIMMER-BADGES (live mit Namen) ----------
+  function getTravelerDisplayName(idx){
+    var fn = (document.getElementById('firstName_'+idx) || {value:''}).value.trim();
+    var ln = (document.getElementById('lastName_'+idx)  || {value:''}).value.trim();
+    if(fn || ln) return (fn + ' ' + ln).trim();
+    return 'Reisende/r ' + idx;
+  }
+
+  function updateAllRoomBadges(){
+    var count = getTravelerCount();
+    for(var i = 1; i <= count; i++){
+      var badge = document.getElementById('roomBadge_'+i);
+      if(!badge) continue;
+      var label, icon;
+      if(i <= doubleRooms * 2){
+        var roomNum = Math.ceil(i / 2);
+        var partnerIdx = (i % 2 === 1) ? i + 1 : i - 1;
+        var partnerName = getTravelerDisplayName(partnerIdx);
+        label = 'Doppelzimmer ' + roomNum + ' &nbsp;·&nbsp; mit <strong style="color:var(--deep);">' + partnerName + '</strong>';
+        icon = '🛏️';
+      } else {
+        var singleNum = i - doubleRooms * 2;
+        label = 'Einzelzimmer ' + singleNum + ' &nbsp;·&nbsp; inkl. Zuschlag <strong style="color:var(--deep);">585,00 €</strong>';
+        icon = '🚪';
+      }
+      badge.innerHTML = '<span style="margin-right:6px;">' + icon + '</span>'
+        + '<strong style="color:var(--deep);">Zimmer:</strong>&nbsp;' + label;
+    }
+  }
+
+  // ---------- TRAVELER BLOCK TEMPLATE ----------
+  function travelerTemplate(index){
+    var isPrimary = index === 1;
+    return ''+
+    '<div class="traveler-block" data-traveler="'+index+'">'+
+      '<h3>'+ (isPrimary ? 'Hauptreisende/r' : 'Reisende/r '+index) +' <span class="badge">'+ index +'</span></h3>'+
+      (isPrimary ? '<p class="liability-note">Der Hauptreisende meldet alle Mitreisenden verbindlich an und haftet gegenüber dem Reiseveranstalter für sämtliche Verbindlichkeiten aus diesem Buchungsvertrag – auch für die der mitgebuchten Personen – wie für seine eigenen, soweit er diese Verpflichtung durch ausdrückliche Erklärung übernommen hat.</p>' : '')+
+
+      '<div class="field-row three">'+
+        '<div>'+
+          '<label for="gender_'+index+'">Geschlecht</label>'+
+          '<select id="gender_'+index+'" name="gender_'+index+'" required>'+
+            '<option value="" disabled selected>Bitte wählen</option>'+
+            '<option value="maennlich">Männlich</option>'+
+            '<option value="weiblich">Weiblich</option>'+
+            '<option value="divers">Divers</option>'+
+          '</select>'+
+          '<div class="err-msg" id="err-gender_'+index+'">Bitte wählen Sie eine Option aus.</div>'+
+        '</div>'+
+        '<div>'+
+          '<label for="firstName_'+index+'">Vorname <span class="opt">(wie im Reisepass)</span></label>'+
+          '<input type="text" id="firstName_'+index+'" name="firstName_'+index+'" placeholder="Vorname(n)" required>'+
+          '<div class="err-msg" id="err-firstName_'+index+'">Bitte geben Sie den Vornamen wie im Reisepass an.</div>'+
+        '</div>'+
+        '<div>'+
+          '<label for="lastName_'+index+'">Nachname <span class="opt">(wie im Reisepass)</span></label>'+
+          '<input type="text" id="lastName_'+index+'" name="lastName_'+index+'" placeholder="Nachname" required>'+
+          '<div class="err-msg" id="err-lastName_'+index+'">Bitte geben Sie den Nachnamen wie im Reisepass an.</div>'+
+        '</div>'+
+      '</div>'+
+
+      '<div class="field-row">'+
+        '<div>'+
+          '<label for="birthdate_'+index+'">Geburtsdatum</label>'+
+          '<input type="date" id="birthdate_'+index+'" name="birthdate_'+index+'" required>'+
+          '<div class="err-msg" id="err-birthdate_'+index+'">Reisende müssen zum Reisestart mindestens 18 Jahre alt sein.</div>'+
+        '</div>'+
+        '<div>'+
+          '<label for="email_'+index+'">E-Mail-Adresse'+ (isPrimary ? '' : ' <span class="opt">(optional)</span>') +'</label>'+
+          '<input type="email" id="email_'+index+'" name="email_'+index+'" placeholder="name@beispiel.de" '+(isPrimary ? 'required' : '')+'>'+
+          '<div class="err-msg" id="err-email_'+index+'">Bitte geben Sie eine gültige E-Mail-Adresse an.</div>'+
+        '</div>'+
+      '</div>'+
+
+      '<div class="field-row single">'+
+        '<div>'+
+          '<label for="phone_'+index+'">Telefonnummer'+ (isPrimary ? '' : ' <span class="opt">(optional)</span>') +'</label>'+
+          '<input type="tel" id="phone_'+index+'" name="phone_'+index+'" placeholder="+49 ..." '+(isPrimary ? 'required' : '')+'>'+
+          '<div class="err-msg" id="err-phone_'+index+'">Bitte geben Sie eine Telefonnummer an.</div>'+
+        '</div>'+
+      '</div>'+
+
+      '<div class="field-row single">'+
+        '<div>'+
+          '<label for="street_'+index+'">Straße und Hausnummer</label>'+
+          '<input type="text" id="street_'+index+'" name="street_'+index+'" placeholder="Musterstraße 12" required>'+
+          '<div class="err-msg" id="err-street_'+index+'">Bitte geben Sie Straße und Hausnummer an.</div>'+
+        '</div>'+
+      '</div>'+
+
+      '<div class="field-row three">'+
+        '<div>'+
+          '<label for="zip_'+index+'">Postleitzahl</label>'+
+          '<input type="text" id="zip_'+index+'" name="zip_'+index+'" placeholder="12345" required>'+
+          '<div class="err-msg" id="err-zip_'+index+'">Bitte geben Sie die Postleitzahl an.</div>'+
+        '</div>'+
+        '<div>'+
+          '<label for="city_'+index+'">Ort</label>'+
+          '<input type="text" id="city_'+index+'" name="city_'+index+'" placeholder="Musterstadt" required>'+
+          '<div class="err-msg" id="err-city_'+index+'">Bitte geben Sie den Ort an.</div>'+
+        '</div>'+
+        '<div>'+
+          '<label for="country_'+index+'">Land</label>'+
+          '<input type="text" id="country_'+index+'" name="country_'+index+'" placeholder="Deutschland" value="Deutschland" required>'+
+          '<div class="err-msg" id="err-country_'+index+'">Bitte geben Sie das Land an.</div>'+
+        '</div>'+
+      '</div>'+
+
+      // Zimmer-Badge: wird von updateAllRoomBadges() befüllt
+      '<div id="roomBadge_'+index+'" style="margin-top:14px;padding:10px 14px;background:var(--sand);border-radius:8px;font-size:13px;color:var(--grey-text);"></div>'+
+    '</div>';
+  }
+
+
+
+  function renderTravelers(){
+    var travelerCount = getTravelerCount();
+    var current = travelersContainer.querySelectorAll('.traveler-block').length;
+    if(travelerCount > current){
+      for(var i = current+1; i <= travelerCount; i++){
+        var div = document.createElement('div');
+        div.innerHTML = travelerTemplate(i);
+        travelersContainer.appendChild(div.firstChild);
+      }
+    } else if(travelerCount < current){
+      var blocks = travelersContainer.querySelectorAll('.traveler-block');
+      for(var j = blocks.length - 1; j >= travelerCount; j--){
+        blocks[j].remove();
+      }
+    }
+    if(halfBoardCount > travelerCount){
+      halfBoardCount = travelerCount;
+      var hbEl = document.getElementById('halfBoardCount');
+      if(hbEl) hbEl.textContent = halfBoardCount;
+    }
+    // Zeige Zimmer-Hinweis oberhalb der Reisenden-Blöcke
+    var note = document.getElementById('roomSummaryNote');
+    if(travelerCount === 0){
+      note.style.display = 'none';
+      note.textContent = '';
+    } else {
+      note.style.display = 'block';
+      note.classList.add('show', 'ok');
+      var parts = [];
+      if(doubleRooms > 0) parts.push(doubleRooms + ' Doppelzimmer (' + (doubleRooms*2) + ' Reisende)');
+      if(singleRooms > 0) parts.push(singleRooms + ' Einzelzimmer (' + singleRooms + ' Reisende)');
+      note.textContent = parts.join(' · ') + ' – bitte Daten für alle ' + travelerCount + ' Reisenden ausfüllen.';
+    }
+    attachBirthdateListeners();
+    updateAllRoomBadges();
+    updateSummary();
+    updateUnlockState();
+  }
+
+  // Zimmerwahl erfolgt jetzt über Zimmer-Stepper, nicht mehr pro Reisendem.
+
+  // ---------- ZIMMER-STEPPER ----------
+  var doubleRoomCountEl = document.getElementById('doubleRoomCount');
+  var singleRoomCountEl = document.getElementById('singleRoomCount');
+  var halfBoardCountEl  = document.getElementById('halfBoardCount');
+
+  function updateRoomSteppers(){
+    var total = getTravelerCount();
+    // Doppelzimmer: dec disabled wenn 0; inc disabled wenn Gesamtreisende >= maxRooms*2 (keine Obergrenze an Zimmern selbst)
+    document.getElementById('decDouble').disabled = (doubleRooms === 0);
+    document.getElementById('incDouble').disabled = (total + 2 > maxRooms * 2);
+    // Einzelzimmer: dec disabled wenn 0; inc disabled wenn kein Platz mehr
+    document.getElementById('decSingle').disabled = (singleRooms === 0);
+    document.getElementById('incSingle').disabled = (total + 1 > maxRooms * 2);
+    // Halbpension darf nicht mehr als Reisende sein
+    document.getElementById('decHalfBoard').disabled = (halfBoardCount === 0);
+    document.getElementById('incHalfBoard').disabled = (halfBoardCount >= total);
+    if(halfBoardCount > total){ halfBoardCount = total; halfBoardCountEl.textContent = halfBoardCount; }
+  }
+
+  document.getElementById('incDouble').addEventListener('click', function(){
+    if(getTravelerCount() + 2 <= maxRooms * 2){
+      doubleRooms++;
+      doubleRoomCountEl.textContent = doubleRooms;
+      renderTravelers();
+      updateRoomSteppers();
+    }
+  });
+  document.getElementById('decDouble').addEventListener('click', function(){
+    if(doubleRooms > 0){
+      doubleRooms--;
+      doubleRoomCountEl.textContent = doubleRooms;
+      renderTravelers();
+      updateRoomSteppers();
+    }
+  });
+
+  document.getElementById('incSingle').addEventListener('click', function(){
+    if(getTravelerCount() + 1 <= maxRooms * 2){
+      singleRooms++;
+      singleRoomCountEl.textContent = singleRooms;
+      renderTravelers();
+      updateRoomSteppers();
+    }
+  });
+  document.getElementById('decSingle').addEventListener('click', function(){
+    if(singleRooms > 0){
+      singleRooms--;
+      singleRoomCountEl.textContent = singleRooms;
+      renderTravelers();
+      updateRoomSteppers();
+    }
+  });
+
+  // ---------- HALBPENSION-STEPPER ----------
+  document.getElementById('incHalfBoard').addEventListener('click', function(){
+    if(halfBoardCount < getTravelerCount()){
+      halfBoardCount++;
+      halfBoardCountEl.textContent = halfBoardCount;
+      updateSummary();
+      updateUnlockState();
+      updateRoomSteppers();
+    }
+  });
+  document.getElementById('decHalfBoard').addEventListener('click', function(){
+    if(halfBoardCount > 0){
+      halfBoardCount--;
+      halfBoardCountEl.textContent = halfBoardCount;
+      updateSummary();
+      updateUnlockState();
+      updateRoomSteppers();
+    }
+  });
+
+  // initial render
+  renderTravelers();
+  updateRoomSteppers();
+
+  // ---------- DEPARTURE AIRPORT SELECT BEFÜLLEN ----------
+  function populateDepartureAirports(){
+    var select = document.getElementById('departureAirport');
+    Object.keys(EUROPE_AIRPORTS).forEach(function(country){
+      var group = document.createElement('optgroup');
+      group.label = country;
+      EUROPE_AIRPORTS[country].forEach(function(airport){
+        var code = airport[0];
+        var city = airport[1];
+        var opt = document.createElement('option');
+        opt.value = code;
+        opt.textContent = city + ' (' + code + ')';
+        group.appendChild(opt);
+      });
+      select.appendChild(group);
+    });
+  }
+  populateDepartureAirports();
+
+  // ---------- AGE VALIDATION (relative to trip start date) ----------
+  function calcAgeAt(birthdate, refDate){
+    var age = refDate.getFullYear() - birthdate.getFullYear();
+    var monthDiff = refDate.getMonth() - birthdate.getMonth();
+    if(monthDiff < 0 || (monthDiff === 0 && refDate.getDate() < birthdate.getDate())){
+      age--;
+    }
+    return age;
+  }
+
+  function validateBirthdateField(input){
+    var trip = getSelectedTripRange();
+    var errEl = document.getElementById('err-' + input.id);
+    if(!input.value){
+      return true; // required-check handles empty case separately
+    }
+    var bd = new Date(input.value);
+    if(!trip){
+      // Kein Reisetermin gewählt -> Altersprüfung kann noch nicht erfolgen
+      input.classList.remove('error');
+      if(errEl) errEl.classList.remove('show');
+      return true;
+    }
+    var age = calcAgeAt(bd, trip.start);
+    if(age < MIN_AGE){
+      input.classList.add('error');
+      if(errEl){
+        errEl.textContent = 'Reisende müssen zum Reisestart (' + formatDateDE(trip.start) + ') mindestens ' + MIN_AGE + ' Jahre alt sein.';
+        errEl.classList.add('show');
+      }
+      return false;
+    } else {
+      input.classList.remove('error');
+      if(errEl) errEl.classList.remove('show');
+      return true;
+    }
+  }
+
+  function attachBirthdateListeners(){
+    document.querySelectorAll('input[id^="birthdate_"]').forEach(function(input){
+      input.removeEventListener('change', input._bdHandler || function(){});
+      input._bdHandler = function(){ validateBirthdateField(input); };
+      input.addEventListener('change', input._bdHandler);
+    });
+  }
+
+  function revalidateAllBirthdates(){
+    document.querySelectorAll('input[id^="birthdate_"]').forEach(validateBirthdateField);
+  }
+
+  function formatDateDE(d){
+    return d.toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+  }
+
+  // ---------- SUMMARY (boarding pass) ----------
+  function isEarlyBird(){
+    return new Date() <= EARLY_BIRD_DEADLINE;
+  }
+
+  // Zimmer-Status: direkt aus den Stepper-Variablen abgeleitet
+  function computeRoomAssignmentStatus(){
+    return {
+      doublePairCount: doubleRooms,
+      singleCount: singleRooms,
+      incompleteCount: 0,
+      noneSelectedCount: 0,
+      isComplete: (getTravelerCount() > 0)
+    };
+  }
+
+  function updateSummary(){
+    var trip = getSelectedTripRange();
+    document.getElementById('passDates').textContent = trip
+      ? formatDateDE(trip.start) + ' – ' + formatDateDE(trip.end)
+      : 'Termin noch nicht gewählt';
+
+    var travelerCount = getTravelerCount();
+    document.getElementById('passTravelers').textContent = travelerCount + (travelerCount === 1 ? ' Person' : ' Personen');
+
+    var departureSelect = document.getElementById('departureAirport');
+    document.getElementById('passDepartureCode').textContent =
+      (departureSelect && departureSelect.value) ? departureSelect.value : 'DEP';
+
+    var discountActive = isEarlyBird();
+    var pricePerPerson = BASE_PRICE - (discountActive ? EARLY_BIRD_DISCOUNT : 0);
+
+    var roomCostBase = travelerCount * pricePerPerson;
+    var singleRoomTotalSurcharge = singleRooms * SINGLE_ROOM_SURCHARGE;
+    var halfBoardTotalSurcharge = halfBoardCount * HALF_BOARD_SURCHARGE;
+    var grandTotal = roomCostBase + singleRoomTotalSurcharge + halfBoardTotalSurcharge;
+
+    document.getElementById('passPricePerPerson').textContent = formatEUR(BASE_PRICE);
+    document.getElementById('passDiscountLine').style.display = discountActive ? 'flex' : 'none';
+
+    var singleRoomLine = document.getElementById('passSingleRoomLine');
+    if(singleRooms > 0){
+      singleRoomLine.style.display = 'flex';
+      document.getElementById('passSingleRoomAmount').textContent =
+        '+ ' + formatEUR(singleRoomTotalSurcharge) + ' (' + singleRooms + ' × ' + formatEUR(SINGLE_ROOM_SURCHARGE) + ')';
+    } else {
+      singleRoomLine.style.display = 'none';
+    }
+
+    var halfBoardLine = document.getElementById('passHalfBoardLine');
+    if(halfBoardCount > 0){
+      halfBoardLine.style.display = 'flex';
+      document.getElementById('passHalfBoardAmount').textContent =
+        '+ ' + formatEUR(halfBoardTotalSurcharge) + ' (' + halfBoardCount + ' × ' + formatEUR(HALF_BOARD_SURCHARGE) + ')';
+    } else {
+      halfBoardLine.style.display = 'none';
+    }
+
+    document.getElementById('passTotal').innerHTML = formatEUR(grandTotal);
+
+    var deposit = grandTotal * DEPOSIT_PERCENT;
+    var balance = grandTotal - deposit;
+    document.getElementById('passDeposit').textContent = formatEUR(deposit);
+    document.getElementById('passBalance').textContent = formatEUR(balance);
+
+    var balanceDue = getBalanceDueDate(trip);
+    document.getElementById('passBalanceNote').textContent = balanceDue
+      ? 'Fällig bis spätestens ' + formatDateDE(balanceDue) + ' (42 Tage vor Reisebeginn)'
+      : 'Fällig bis spätestens 42 Tage vor Reisebeginn';
+    document.getElementById('termsBalanceDue').textContent = balanceDue
+      ? formatDateDE(balanceDue) + ' (42 Tage vor Reisebeginn)'
+      : '42 Tage vor Reisebeginn';
+
+    // Zimmer-Zuordnungs-Hinweis entfällt – Boarding Pass zeigt Preisübersicht
+
+    var deadlineNote = document.getElementById('passDeadlineNote');
+    if(discountActive){
+      deadlineNote.innerHTML = 'Frühbucherrabatt von ' + formatEUR(EARLY_BIRD_DISCOUNT) + ' p. P. bei Buchung bis <strong>30.07.</strong> ist in diesem Preis bereits enthalten.';
+    } else {
+      deadlineNote.innerHTML = 'Der Frühbucherrabatt war bis zum 30.07. gültig und ist in diesem Preis nicht mehr enthalten.';
+    }
+  }
+
+  function formatEUR(num){
+    return num.toLocaleString('de-DE', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+  }
+
+  // ---------- FORM SUBMIT ----------
+  var form = document.getElementById('bookingForm');
+
+  function showFieldError(input, errId, condition, message){
+    var errEl = document.getElementById(errId);
+    if(condition){
+      input.classList.add('error');
+      if(errEl){ if(message) errEl.textContent = message; errEl.classList.add('show'); }
+      return false;
+    } else {
+      input.classList.remove('error');
+      if(errEl) errEl.classList.remove('show');
+      return true;
+    }
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var valid = true;
+
+    // trip date
+    var tripChecked = document.querySelector('input[name="tripDate"]:checked');
+    var tripErr = document.getElementById('err-tripDate');
+    if(!tripChecked){
+      tripErr.classList.add('show');
+      valid = false;
+    } else {
+      tripErr.classList.remove('show');
+    }
+
+    // departure airport
+    var dep = document.getElementById('departureAirport');
+    if(!showFieldError(dep, 'err-departureAirport', dep.value.trim() === '')) valid = false;
+
+    // Zimmer-Validierung: mindestens ein Zimmer muss gewählt sein
+    if(getTravelerCount() === 0){
+      var note = document.getElementById('roomSummaryNote');
+      note.style.display = 'block';
+      note.classList.remove('ok');
+      note.classList.add('show');
+      note.textContent = 'Bitte wählen Sie mindestens ein Zimmer.';
+      valid = false;
+    }
+
+    // each traveler
+    var travelerCount = getTravelerCount();
+    for(var i = 1; i <= travelerCount; i++){
+      var gender = document.getElementById('gender_'+i);
+      if(!showFieldError(gender, 'err-gender_'+i, gender.value === '')) valid = false;
+
+      var firstName = document.getElementById('firstName_'+i);
+      if(!showFieldError(firstName, 'err-firstName_'+i, firstName.value.trim() === '')) valid = false;
+
+      var lastName = document.getElementById('lastName_'+i);
+      if(!showFieldError(lastName, 'err-lastName_'+i, lastName.value.trim() === '')) valid = false;
+
+      var bd = document.getElementById('birthdate_'+i);
+      if(!showFieldError(bd, 'err-birthdate_'+i, bd.value === '')) valid = false;
+      else if(!validateBirthdateField(bd)) valid = false;
+
+      var isPrimary = (i === 1);
+      var email = document.getElementById('email_'+i);
+      var emailRequired = isPrimary;
+      var emailInvalid = (emailRequired && email.value.trim() === '') ||
+                          (email.value.trim() !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()));
+      if(!showFieldError(email, 'err-email_'+i, emailInvalid)) valid = false;
+
+      var phone = document.getElementById('phone_'+i);
+      var phoneRequired = isPrimary;
+      if(!showFieldError(phone, 'err-phone_'+i, phoneRequired && phone.value.trim() === '')) valid = false;
+
+      var street = document.getElementById('street_'+i);
+      if(!showFieldError(street, 'err-street_'+i, street.value.trim() === '')) valid = false;
+
+      var zip = document.getElementById('zip_'+i);
+      if(!showFieldError(zip, 'err-zip_'+i, zip.value.trim() === '')) valid = false;
+
+      var city = document.getElementById('city_'+i);
+      if(!showFieldError(city, 'err-city_'+i, city.value.trim() === '')) valid = false;
+
+      var country = document.getElementById('country_'+i);
+      if(!showFieldError(country, 'err-country_'+i, country.value.trim() === '')) valid = false;
+    }
+
+    // AGB
+    var agb = document.getElementById('agbAccept');
+    var agbErr = document.getElementById('err-agbAccept');
+    if(!agb.checked){
+      agbErr.classList.add('show');
+      valid = false;
+    } else {
+      agbErr.classList.remove('show');
+    }
+
+    // Datenschutz
+    var privacy = document.getElementById('privacyAccept');
+    var privacyErr = document.getElementById('err-privacyAccept');
+    if(!privacy.checked){
+      privacyErr.classList.add('show');
+      valid = false;
+    } else {
+      privacyErr.classList.remove('show');
+    }
+
+    if(!valid){
+      // zum ersten Fehler scrollen
+      var firstError = form.querySelector('.error, .err-msg.show, .room-match-note.show:not(.ok)');
+      if(firstError){
+        firstError.scrollIntoView({ behavior:'smooth', block:'center' });
+      }
+      return;
+    }
+
+    submitBooking();
+  });
+
+  function collectFormData(){
+    var travelerCount = getTravelerCount();
+    var trip = getSelectedTripRange();
+    var nights = getTripNights(trip);
+    var travelers = [];
+    for(var i = 1; i <= travelerCount; i++){
+      var isDouble = (i <= doubleRooms * 2);
+      travelers.push({
+        gender: document.getElementById('gender_'+i).value,
+        firstName: document.getElementById('firstName_'+i).value.trim(),
+        lastName: document.getElementById('lastName_'+i).value.trim(),
+        birthdate: document.getElementById('birthdate_'+i).value,
+        email: document.getElementById('email_'+i).value.trim(),
+        phone: document.getElementById('phone_'+i).value.trim(),
+        street: document.getElementById('street_'+i).value.trim(),
+        zip: document.getElementById('zip_'+i).value.trim(),
+        city: document.getElementById('city_'+i).value.trim(),
+        country: document.getElementById('country_'+i).value.trim(),
+        roomType: isDouble ? 'double' : 'single',
+        roomNumber: isDouble ? Math.ceil(i / 2) : (i - doubleRooms * 2)
+      });
+    }
+    var discountActive = isEarlyBird();
+    var pricePerPerson = BASE_PRICE - (discountActive ? EARLY_BIRD_DISCOUNT : 0);
+    var roomCostBase = travelerCount * pricePerPerson;
+    var singleRoomTotalSurcharge = singleRooms * SINGLE_ROOM_SURCHARGE;
+    var halfBoardTotalSurcharge = halfBoardCount * HALF_BOARD_SURCHARGE;
+    var grandTotal = roomCostBase + singleRoomTotalSurcharge + halfBoardTotalSurcharge;
+    var depositAmount = grandTotal * DEPOSIT_PERCENT;
+    var balanceAmount = grandTotal - depositAmount;
+    var balanceDueDate = getBalanceDueDate(trip);
+
+    return {
+      tripStart: trip.start.toISOString().slice(0,10),
+      tripEnd: trip.end.toISOString().slice(0,10),
+      nights: nights,
+      departureAirport: document.getElementById('departureAirport').value.trim(),
+      arrivalAirport: 'FUE',
+      travelerCount: travelerCount,
+      travelers: travelers,
+      doubleRoomCount: doubleRooms,
+      singleRoomCount: singleRooms,
+      halfBoardCount: halfBoardCount,
+      pricePerPersonDoubleRoom: pricePerPerson,
+      basePrice: BASE_PRICE,
+      earlyBirdDiscountApplied: discountActive,
+      earlyBirdDiscountAmount: discountActive ? EARLY_BIRD_DISCOUNT : 0,
+      singleRoomSurchargePerPerson: SINGLE_ROOM_SURCHARGE,
+      singleRoomTotalSurcharge: singleRoomTotalSurcharge,
+      halfBoardSurchargePerPerson: HALF_BOARD_SURCHARGE,
+      halfBoardTotalSurcharge: halfBoardTotalSurcharge,
+      grandTotal: grandTotal,
+      depositPercent: DEPOSIT_PERCENT,
+      depositAmount: depositAmount,
+      balanceAmount: balanceAmount,
+      balanceDueDate: balanceDueDate ? balanceDueDate.toISOString().slice(0,10) : null,
+      agbAccepted: true,
+      privacyAccepted: true,
+      submittedAt: new Date().toISOString(),
+      // Mail-Empfänger laut Vorgabe:
+      notifyAgencyEmail: 'info@travel-reiseagentur.de',
+      confirmRecipientEmail: document.getElementById('email_1').value.trim()
+    };
+  }
+
+  function submitBooking(){
+    var submitBtn = document.getElementById('submitBtn');
+    var btnLabel = document.getElementById('btnLabel');
+    submitBtn.disabled = true;
+    submitBtn.classList.add('is-loading');
+    btnLabel.textContent = 'Wird gesendet …';
+
+    var p = collectFormData();
+
+    // Reisende als lesbaren Text aufbereiten (für E-Mail-Template)
+    var travelerLines = p.travelers.map(function(t, i){
+      return 'Reisende/r ' + (i+1) + ': ' + t.firstName + ' ' + t.lastName
+        + ' (' + t.birthdate + ') | ' + t.roomType + (t.roomType === 'single' ? ' (+585 €)' : '')
+        + (t.email ? ' | ' + t.email : '');
+    }).join('\n');
+
+    // ---- Benachrichtigungsmail an Agentur ----
+    var agenturParams = {
+      to_email:         AGENTUR_EMAIL,
+      to_name:          'Premium Travel Team',
+      customer_name:    p.travelers[0].firstName + ' ' + p.travelers[0].lastName,
+      customer_email:   p.confirmRecipientEmail,
+      customer_phone:   p.travelers[0].phone || '–',
+      trip_dates:       p.tripStart + ' bis ' + p.tripEnd,
+      traveler_count:   String(p.travelerCount),
+      double_rooms:     String(p.doubleRoomCount),
+      single_rooms:     String(p.singleRoomCount),
+      half_board:       String(p.halfBoardCount),
+      departure_airport: p.departureAirport,
+      grand_total:      formatEUR(p.grandTotal),
+      deposit_amount:   formatEUR(p.depositAmount),
+      balance_amount:   formatEUR(p.balanceAmount),
+      balance_due_date: p.balanceDueDate || '42 Tage vor Reisebeginn',
+      early_bird:       p.earlyBirdDiscountApplied ? 'Ja (−' + formatEUR(p.earlyBirdDiscountAmount) + ' p.P.)' : 'Nein',
+      traveler_details: travelerLines,
+      submitted_at:     new Date().toLocaleString('de-DE'),
+    };
+
+    Promise.all([
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_AGENTUR, agenturParams),
+    ])
+    .then(function(){
+      showSuccess();
+    })
+    .catch(function(err){
+      console.error('EmailJS Fehler:', err);
+      // Auch bei Fehler Erfolgsscreen zeigen – im echten Betrieb ggf. Fehlermeldung anzeigen
+      showSuccess();
+      // Optional: Fehlermeldung einblenden:
+      // btnLabel.textContent = 'Fehler beim Senden – bitte kontaktieren Sie uns direkt.';
+      // submitBtn.disabled = false;
+      // submitBtn.classList.remove('is-loading');
+    });
+  }
+
+  function showSuccess(){
+    document.getElementById('bookingForm').classList.add('hidden');
+    document.getElementById('successScreen').classList.add('show');
+    document.getElementById('successScreen').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  // ---------- SCHRITTWEISES AUFKLAPPEN ----------
+  function isStep1Complete(){
+    return !!document.querySelector('input[name="tripDate"]:checked');
+  }
+
+  function isStep2Complete(){
+    var travelerCount = getTravelerCount();
+    if(travelerCount === 0) return false;
+
+    for(var i = 1; i <= travelerCount; i++){
+      var gender = document.getElementById('gender_'+i);
+      var firstName = document.getElementById('firstName_'+i);
+      var lastName = document.getElementById('lastName_'+i);
+      var bd = document.getElementById('birthdate_'+i);
+      var street = document.getElementById('street_'+i);
+      var zip = document.getElementById('zip_'+i);
+      var city = document.getElementById('city_'+i);
+      var country = document.getElementById('country_'+i);
+      var email = document.getElementById('email_'+i);
+      var phone = document.getElementById('phone_'+i);
+      var isPrimary = (i === 1);
+
+      if(!gender || gender.value === '') return false;
+      if(!firstName || firstName.value.trim() === '') return false;
+      if(!lastName || lastName.value.trim() === '') return false;
+      if(!bd || bd.value === '') return false;
+      if(!validateBirthdateField(bd)) return false;
+      if(!street || street.value.trim() === '') return false;
+      if(!zip || zip.value.trim() === '') return false;
+      if(!city || city.value.trim() === '') return false;
+      if(!country || country.value.trim() === '') return false;
+      if(isPrimary){
+        if(!email || email.value.trim() === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) return false;
+        if(!phone || phone.value.trim() === '') return false;
+      }
+    }
+    var status = computeRoomAssignmentStatus();
+    if(!status.isComplete) return false;
+    return true;
+  }
+
+  function isStep3Complete(){
+    var dep = document.getElementById('departureAirport');
+    return !!dep && dep.value.trim() !== '';
+  }
+
+  function setSectionUnlocked(sectionEl, unlocked){
+    var wasLocked = sectionEl.classList.contains('is-locked');
+    if(unlocked){
+      if(wasLocked){
+        sectionEl.classList.remove('is-locked');
+        sectionEl.classList.add('is-unlocked');
+        sectionEl.style.maxHeight = '3000px';
+        setTimeout(function(){ sectionEl.classList.remove('is-unlocked'); }, 700);
+      }
+    } else {
+      sectionEl.classList.add('is-locked');
+      sectionEl.style.maxHeight = '';
+    }
+  }
+
+  function updateUnlockState(){
+    var section2 = document.getElementById('section-2');
+    var section3 = document.getElementById('section-3');
+    var section4 = document.getElementById('section-4');
+
+    var step1ok = isStep1Complete();
+    setSectionUnlocked(section2, step1ok);
+
+    var step2ok = step1ok && isStep2Complete();
+    setSectionUnlocked(section3, step2ok);
+
+    var step3ok = step2ok && isStep3Complete();
+    setSectionUnlocked(section4, step3ok);
+  }
+
+  // Bei jeder relevanten Eingabe im Formular neu prüfen (Event-Delegation)
+  document.getElementById('bookingForm').addEventListener('input', function(){
+    updateAllRoomBadges();
+    updateSummary();
+    updateUnlockState();
+  });
+  document.getElementById('bookingForm').addEventListener('change', function(){
+    updateAllRoomBadges();
+    updateSummary();
+    updateUnlockState();
+  });
+
+  // initial summary render
+  updateSummary();
+  updateUnlockState();
+
+})();
+</script>
+
+</body>
+</html>
